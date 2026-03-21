@@ -1,0 +1,28 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
+# Godot text assets: keep mergeable and review-friendly.
+*.gd text diff
+*.tscn text diff
+*.tres text diff
+*.shader text diff
+*.gdshader text diff
+*.cfg text
+*.md text
+
+# Common binary assets: disable text diffs/merges.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.svg text diff
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.flac binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary

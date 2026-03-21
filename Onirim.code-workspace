@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+        "workbench.colorCustomizations": {
+            "minimap.background": "#0000003a",
+            "scrollbar.shadow": "#0000003a"
+        },
+        "godotTools.editorPath.godot4": "/snap/bin/godot-4"
+    }
+}
