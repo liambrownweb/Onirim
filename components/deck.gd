@@ -11,10 +11,17 @@ func _init(initial_cards: Array = []):
 # Build the deck from base + expansions (both arrays of card ids)
 func build_from(base: Array, expansions: Array = []) -> void:
 	cards = []
-	cards += base
+	cards.append_array(expand_deck(base))
 	for exp in expansions:
 		cards += exp
 	shuffle()
+	
+func expand_deck(deck):
+	var result = []
+	for c in deck:
+		for i in range(c["count"]):
+			result.append(Card.new(c))
+	return result
 
 func shuffle() -> void:
 	cards.shuffle()

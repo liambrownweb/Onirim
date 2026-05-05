@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dckiuu1fy2v86"]
+
+[node name="Gameboard" type="Node2D" unique_id=398388100]
+
+[node name="PlayRow" type="HFlowContainer" parent="." unique_id=1926242922]
+offset_right = 919.0
+offset_bottom = 211.0
+
+[node name="PlayerHand" type="Node2D" parent="." unique_id=1736438590]
+position = Vector2(554, 508)
