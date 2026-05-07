@@ -14,7 +14,7 @@ extends Control
 @onready var is_open: bool = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _init() -> void:

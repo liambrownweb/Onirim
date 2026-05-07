@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dyk2fh3hd2l84"]
+
+[ext_resource type="Texture2D" uid="uid://b2v7s7umeu6rg" path="res://images/karnak_pillars_night.png" id="1_hael8"]
+[ext_resource type="Texture2D" uid="uid://bop825bip6nss" path="res://images/moon.svg" id="2_21rx5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ujke"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Card" type="Node2D" unique_id=113991462]
+
+[node name="Panel" type="Panel" parent="." unique_id=1737825795]
+clip_children = 2
+clip_contents = true
+offset_right = 352.0
+offset_bottom = 493.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ujke")
+
+[node name="BackgroundArt" type="TextureRect" parent="Panel" unique_id=1138843812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hael8")
+expand_mode = 3
+
+[node name="Glyph" type="TextureRect" parent="Panel" unique_id=978775835]
+layout_mode = 0
+offset_right = 113.0
+offset_bottom = 113.0
+texture = ExtResource("2_21rx5")
+expand_mode = 3
