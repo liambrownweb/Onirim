@@ -12,27 +12,24 @@ var original_parent = null
 var original_index = -1
 var original_rect_pos = Vector2.ZERO
 
-@onready var DragLayer = get_tree().root.get_node(\"Main/DragLayer\") # adjust path
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var DragLayer = get_tree().root.get_node(\"Main/DragLayer\")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _ready() -> void:
 	pass
-	
+
+func _process(_delta: float) -> void:
+	pass
+
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var mouse = get_viewport().get_mouse_position()
-		if get_global_rect().has_point(mouse):    # Control: Rect2 in global coords
-			_start_drag(mouse)
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			_start_drag(event.position)
 		elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and dragging:
 			_end_drag()
 	elif event is InputEventMouseMotion and dragging:
 		global_position = get_global_mouse_position() - drag_offset	
-		
+
 func _start_drag(local_click_pos):
 	dragging = true
 	original_parent = get_parent()
@@ -73,9 +70,8 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	print(at_position)
 	return at_position
 
-
 func _on_mouse_entered() -> void:
-	print (\"Mouse Entered!\")
+	pass
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ked3"]
@@ -97,19 +93,19 @@ corner_radius_bottom_left = 15
 
 [node name="Card" type="Control" unique_id=200595644]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -600.0
-offset_right = -710.0
-offset_bottom = -200.0
+anchor_left = 0.065000005
+anchor_top = 0.16700001
+anchor_right = 0.065000005
+anchor_bottom = 0.16700001
+offset_left = -124.80001
+offset_top = -200.40001
+offset_right = 125.19999
+offset_bottom = 199.59999
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 script = SubResource("GDScript_8ked3")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=38472730]
@@ -119,12 +115,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_8ked3")
 
 [node name="Panel" type="Panel" parent="PanelContainer" unique_id=1737825795]
 clip_children = 2
 clip_contents = true
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_3ujke")
 
 [node name="BackgroundArt" type="TextureRect" parent="PanelContainer/Panel" unique_id=1138843812]

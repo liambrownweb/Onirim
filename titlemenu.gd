@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var start_menu = $StartMenu
@@ -26,7 +26,7 @@ func _ready() -> void:
 	start_btn.pressed.connect(_on_start_pressed)    # If you want ESC or menu key to toggle:    
 	#Input.set_custom_mouse_cursor(Input.CURSOR_ARROW) # optional
 	show_open_state()
-		
+	
 func _on_end_pressed() -> void:
 	if game.game_in_progress:
 		game.end_game()
@@ -84,8 +84,6 @@ func close_start_menu() -> void:
 	if not is_open: return
 	play_close_animation()
 	get_tree().call_group("game", "on_menu_closed")
-	start_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	game_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	is_open = false
 	
 # Animation helpers

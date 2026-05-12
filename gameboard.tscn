@@ -4,15 +4,20 @@
 
 [node name="Gameboard" type="Control" unique_id=496842010]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 
 [node name="PlayerHand" type="Control" parent="." unique_id=1537333377]
+custom_minimum_size = Vector2(300, 300)
 anchors_preset = 0
-offset_left = 923.0
-offset_top = 778.0
-offset_right = 923.0
-offset_bottom = 778.0
+offset_left = 187.0
+offset_top = 609.0
+offset_right = 1791.0
+offset_bottom = 1078.0
 mouse_filter = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1051538481]

@@ -8,12 +8,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func init_ui() -> void:
 	populate_hand()
-	
+
 func populate_hand() -> void:
 	for data in game.hand:
 		var card = CardScene.instantiate()
@@ -23,10 +23,10 @@ func populate_hand() -> void:
 		elif card.has_node("Sprite") and data.texture:
 			card.get_node("Sprite").texture = load(data.texture)
 		$PlayerHand.add_child(card)
-		hand_array.insert(0, card)
 	_update_layout()
 		
 func _update_layout():
+	var hand_array = $PlayerHand.get_children()
 	var n = hand_array.size()
 	if n == 0:
 		return

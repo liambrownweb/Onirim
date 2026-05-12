@@ -7,13 +7,17 @@
 
 [node name="Game" type="Control" unique_id=893702650]
 layout_mode = 3
-anchors_preset = 0
-mouse_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_80nbo")
-
-[node name="Titlemenu" parent="." unique_id=931342479 instance=ExtResource("2_e2o6t")]
 
 [node name="Gameboard" parent="." unique_id=398388100 instance=ExtResource("3_feb5d")]
 layout_mode = 0
 mouse_filter = 1
 script = ExtResource("3_fc0e3")
+
+[node name="Titlemenu" parent="." unique_id=931342479 instance=ExtResource("2_e2o6t")]
+layout_mode = 1
