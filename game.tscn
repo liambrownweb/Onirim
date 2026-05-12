@@ -5,10 +5,15 @@
 [ext_resource type="Script" uid="uid://bt202sm4hf500" path="res://gameboard.gd" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://dckiuu1fy2v86" path="res://gameboard.tscn" id="3_feb5d"]
 
-[node name="Game" type="Node2D" unique_id=1287225314]
+[node name="Game" type="Control" unique_id=893702650]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("1_80nbo")
 
-[node name="Gameboard" parent="." unique_id=398388100 instance=ExtResource("3_feb5d")]
-script = ExtResource("3_fc0e3")
-
 [node name="Titlemenu" parent="." unique_id=931342479 instance=ExtResource("2_e2o6t")]
+
+[node name="Gameboard" parent="." unique_id=398388100 instance=ExtResource("3_feb5d")]
+layout_mode = 0
+mouse_filter = 1
+script = ExtResource("3_fc0e3")

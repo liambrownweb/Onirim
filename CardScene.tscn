@@ -3,34 +3,147 @@
 [ext_resource type="Texture2D" uid="uid://b2v7s7umeu6rg" path="res://images/karnak_pillars_night.png" id="1_hael8"]
 [ext_resource type="Texture2D" uid="uid://bop825bip6nss" path="res://images/moon.svg" id="2_21rx5"]
 
+[sub_resource type="GDScript" id="GDScript_8ked3"]
+resource_name = "CardScene"
+script/source = "extends Control
+var dragging = false
+var drag_offset = Vector2.ZERO
+var original_parent = null
+var original_index = -1
+var original_rect_pos = Vector2.ZERO
+
+@onready var DragLayer = get_tree().root.get_node(\"Main/DragLayer\") # adjust path
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		var mouse = get_viewport().get_mouse_position()
+		if get_global_rect().has_point(mouse):    # Control: Rect2 in global coords
+			_start_drag(mouse)
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_start_drag(event.position)
+		elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and dragging:
+			_end_drag()
+	elif event is InputEventMouseMotion and dragging:
+		global_position = get_global_mouse_position() - drag_offset	
+		
+func _start_drag(local_click_pos):
+	dragging = true
+	original_parent = get_parent()
+	original_index = self.get_index()
+	original_rect_pos = position
+	drag_offset = local_click_pos
+	# reparent to DragLayer while preserving global position
+	var gpos = global_position
+	original_parent.remove_child(self)
+	DragLayer.add_child(self)
+	global_position = gpos
+	move_to_front()
+
+func _end_drag():
+	dragging = false
+	# find drop target under mouse (example: a Control with \"PlayRow\" name)
+	var mouse_pos = get_global_mouse_position()
+	var root = get_tree().root
+	var picked = root.gui_pick(mouse_pos)  # returns Control under point
+	if picked and picked.is_in_group(\"play_row\"):
+		# add to end of play row and adjust local position/layout
+		var target = picked
+		var local = target.to_local(mouse_pos)
+		DragLayer.remove_child(self)
+		target.add_child(self)
+		position = local
+		# call target layout update if needed
+		if target.has_method(\"on_card_dropped\"):
+			target.on_card_dropped(self)
+	else:
+		# return to original parent and animate back (instant here)
+		DragLayer.remove_child(self)
+		original_parent.add_child(self)
+		original_parent.move_child(self, original_index)
+		position = original_rect_pos
+
+func _get_drag_data(at_position: Vector2) -> Variant:
+	print(at_position)
+	return at_position
+
+
+func _on_mouse_entered() -> void:
+	print (\"Mouse Entered!\")
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ked3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ujke"]
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[node name="Card" type="Node2D" unique_id=113991462]
+[node name="Card" type="Control" unique_id=200595644]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -600.0
+offset_right = -710.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("GDScript_8ked3")
 
-[node name="Panel" type="Panel" parent="." unique_id=1737825795]
-clip_children = 2
-clip_contents = true
-offset_right = 352.0
-offset_bottom = 493.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_3ujke")
-
-[node name="BackgroundArt" type="TextureRect" parent="Panel" unique_id=1138843812]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=38472730]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ked3")
+
+[node name="Panel" type="Panel" parent="PanelContainer" unique_id=1737825795]
+clip_children = 2
+clip_contents = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ujke")
+
+[node name="BackgroundArt" type="TextureRect" parent="PanelContainer/Panel" unique_id=1138843812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.857147
+offset_right = 17.857147
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_hael8")
 expand_mode = 3
 
-[node name="Glyph" type="TextureRect" parent="Panel" unique_id=978775835]
+[node name="Glyph" type="TextureRect" parent="PanelContainer/Panel" unique_id=978775835]
 layout_mode = 0
 offset_right = 113.0
 offset_bottom = 113.0
 texture = ExtResource("2_21rx5")
 expand_mode = 3
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

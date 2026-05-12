@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 var game_deck: Deck
 var hand = []
 var limbo = []

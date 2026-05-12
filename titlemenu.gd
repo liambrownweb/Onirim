@@ -1,5 +1,4 @@
-extends Control
-# extends Control
+extends CanvasLayer
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var start_menu = $StartMenu
@@ -9,7 +8,7 @@ extends Control
 @onready var exit_btn: TextureButton = $StartMenu/ExitButton
 @onready var resume_btn: TextureButton = $GameMenu/ResumeButton
 @onready var end_btn: TextureButton = $GameMenu/EndGameButton
-@onready var game: Node2D = get_node("/root/Main/Game")
+@onready var game: Control = get_node("/root/Main/Game")
 @onready var main: Node = get_node("/root/Main")
 @onready var is_open: bool = true
 
@@ -85,6 +84,8 @@ func close_start_menu() -> void:
 	if not is_open: return
 	play_close_animation()
 	get_tree().call_group("game", "on_menu_closed")
+	start_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	game_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	is_open = false
 	
 # Animation helpers

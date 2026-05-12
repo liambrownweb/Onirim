@@ -1,21 +1,25 @@
 [gd_scene format=3 uid="uid://bh6ao1rsyyl1n"]
 
 [ext_resource type="PackedScene" uid="uid://dehdcnwj3m0cq" path="res://game.tscn" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://dyk2fh3hd2l84" path="res://CardScene.tscn" id="2_uu6xs"]
 
 [sub_resource type="GDScript" id="GDScript_glv2v"]
-script/source = "extends Node
+script/source = "extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	var gui_root = null
+	for c in get_tree().get_root().get_children():
+		print(c.name)
+		if c is Control:
+			gui_root = c
+			break
+	print(\"GUI root:\", gui_root)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
-func _input(event):
-	if event.is_action_pressed(\"ui_menu\"):
-		$Game/Titlemenu.toggle_menu()
 		
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
@@ -30,7 +34,19 @@ func pause_game() -> void:
 	$Game/Titlemenu.toggle_menu()
 "
 
-[node name="Main" type="Node" unique_id=1164613142]
+[node name="Main" type="Control" unique_id=1932190584]
+layout_mode = 3
+anchors_preset = 0
 script = SubResource("GDScript_glv2v")
 
 [node name="Game" parent="." unique_id=1287225314 instance=ExtResource("1_glv2v")]
+layout_mode = 0
+
+[node name="DragLayer" type="Node2D" parent="." unique_id=1527904814]
+
+[node name="Card" parent="." unique_id=200595644 instance=ExtResource("2_uu6xs")]
+layout_mode = 1
+offset_left = 362.0
+offset_top = 706.0
+offset_right = 612.0
+offset_bottom = 1106.0

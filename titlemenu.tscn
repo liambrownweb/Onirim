@@ -134,22 +134,16 @@ _data = {
 &"menu_close": SubResource("Animation_crcit")
 }
 
-[node name="Titlemenu" type="Control" unique_id=931342479]
-layout_mode = 3
+[node name="Titlemenu" type="CanvasLayer" unique_id=1606193553]
+script = ExtResource("1_m4ao8")
+
+[node name="StartMenu" type="Panel" parent="." unique_id=1491566323]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_m4ao8")
-
-[node name="StartMenu" type="Panel" parent="." unique_id=1491566323]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.83500004
-anchor_bottom = 0.78200006
-offset_right = -921.92004
-offset_bottom = -466.73605
+mouse_filter = 2
 
 [node name="Background" type="ColorRect" parent="StartMenu" unique_id=1141260035]
 layout_mode = 1
@@ -176,12 +170,12 @@ texture_normal = ExtResource("3_op221")
 libraries/ = SubResource("AnimationLibrary_jqbtt")
 
 [node name="GameMenu" type="Panel" parent="." unique_id=1512591309]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.83500004
 anchor_bottom = 0.78200006
 offset_right = -921.92004
 offset_bottom = -466.73605
+mouse_filter = 2
 
 [node name="Background" type="ColorRect" parent="GameMenu" unique_id=1069421629]
 layout_mode = 1
