@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dauvyt61ylhia"]
+
+[ext_resource type="Texture2D" uid="uid://dmmqa44q4hli4" path="res://door.svg" id="1_lfag1"]
+
+[sub_resource type="GDScript" id="GDScript_wigwf"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+
+func _gui_input(_event: InputEvent) -> void:
+	print (\"HAHAHAHA\")
+"
+
+[node name="Testcontrol" type="Control" unique_id=638715831]
+clip_contents = true
+layout_mode = 3
+anchor_right = 0.044000003
+anchor_bottom = 0.031000001
+offset_left = 3.0
+offset_top = 6.0
+offset_right = 267.52
+offset_bottom = 146.8
+script = SubResource("GDScript_wigwf")
+
+[node name="Door" type="Sprite2D" parent="." unique_id=1773421270]
+position = Vector2(154, 188)
+texture = ExtResource("1_lfag1")

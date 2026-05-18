@@ -143,6 +143,42 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m4ao8")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=706473043]
+libraries/ = SubResource("AnimationLibrary_jqbtt")
+
+[node name="GameMenu" type="Panel" parent="." unique_id=1512591309]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.83500004
+anchor_bottom = 0.78200006
+offset_right = -921.92004
+offset_bottom = -466.73605
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="GameMenu" unique_id=1069421629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1314.72
+offset_bottom = 809.33594
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="TextureButton" parent="GameMenu" unique_id=1861822391]
+layout_mode = 0
+offset_right = 289.0
+offset_bottom = 102.0
+texture_normal = ExtResource("3_crcit")
+
+[node name="EndGameButton" type="TextureButton" parent="GameMenu" unique_id=588121873]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 120.0
+offset_right = 288.0
+offset_bottom = 222.0
+texture_normal = ExtResource("4_jqbtt")
+
 [node name="StartMenu" type="Panel" parent="." unique_id=1491566323]
 layout_mode = 1
 anchors_preset = 15
@@ -173,37 +209,3 @@ offset_top = 122.0
 offset_right = 289.0
 offset_bottom = 224.0
 texture_normal = ExtResource("3_op221")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=706473043]
-libraries/ = SubResource("AnimationLibrary_jqbtt")
-
-[node name="GameMenu" type="Panel" parent="." unique_id=1512591309]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.83500004
-anchor_bottom = 0.78200006
-offset_right = -921.92004
-offset_bottom = -466.73605
-mouse_filter = 2
-
-[node name="Background" type="ColorRect" parent="GameMenu" unique_id=1069421629]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 18.725
-anchor_bottom = 10.375001
-offset_right = 9.0
-offset_bottom = 11.9999695
-
-[node name="ResumeButton" type="TextureButton" parent="GameMenu" unique_id=1861822391]
-layout_mode = 0
-offset_right = 289.0
-offset_bottom = 102.0
-texture_normal = ExtResource("3_crcit")
-
-[node name="EndGameButton" type="TextureButton" parent="GameMenu" unique_id=588121873]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 120.0
-offset_right = 288.0
-offset_bottom = 222.0
-texture_normal = ExtResource("4_jqbtt")

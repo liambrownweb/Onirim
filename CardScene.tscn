@@ -11,6 +11,7 @@ var drag_offset = Vector2.ZERO
 var original_parent = null
 var original_index = -1
 var original_rect_pos = Vector2.ZERO
+var gameboard = null
 
 @onready var DragLayer = get_tree().root.get_node(\"Main/DragLayer\")
 
@@ -20,13 +21,24 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		var mouse = get_viewport().get_mouse_position()
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			_start_drag(event.position)
-		elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and dragging:
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \\
+		and event.button_index == MOUSE_BUTTON_LEFT \\
+		and dragging \\
+		and not event.pressed:
 			_end_drag()
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		print(event)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			print(\"Starting drag\")
+			_start_drag(event.position)
+		else:
+			print(\"Not starting drag\")
+		#else:
+			#_end_drag()
 	elif event is InputEventMouseMotion and dragging:
 		global_position = get_global_mouse_position() - drag_offset	
 
@@ -45,26 +57,7 @@ func _start_drag(local_click_pos):
 
 func _end_drag():
 	dragging = false
-	# find drop target under mouse (example: a Control with \"PlayRow\" name)
-	var mouse_pos = get_global_mouse_position()
-	var root = get_tree().root
-	var picked = root.gui_pick(mouse_pos)  # returns Control under point
-	if picked and picked.is_in_group(\"play_row\"):
-		# add to end of play row and adjust local position/layout
-		var target = picked
-		var local = target.to_local(mouse_pos)
-		DragLayer.remove_child(self)
-		target.add_child(self)
-		position = local
-		# call target layout update if needed
-		if target.has_method(\"on_card_dropped\"):
-			target.on_card_dropped(self)
-	else:
-		# return to original parent and animate back (instant here)
-		DragLayer.remove_child(self)
-		original_parent.add_child(self)
-		original_parent.move_child(self, original_index)
-		position = original_rect_pos
+	gameboard.drop_card(self)
 
 func _get_drag_data(at_position: Vector2) -> Variant:
 	print(at_position)
@@ -92,6 +85,7 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [node name="Card" type="Control" unique_id=200595644]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 3
 anchor_left = 0.065000005
 anchor_top = 0.16700001
@@ -103,8 +97,8 @@ offset_right = 125.19999
 offset_bottom = 199.59999
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 6
+size_flags_vertical = 6
 mouse_filter = 1
 script = SubResource("GDScript_8ked3")
 

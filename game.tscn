@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://fpw0qtq4j1qs" path="res://game.gd" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://cibupdgynhap6" path="res://titlemenu.tscn" id="2_e2o6t"]
-[ext_resource type="Script" uid="uid://bt202sm4hf500" path="res://gameboard.gd" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://dckiuu1fy2v86" path="res://gameboard.tscn" id="3_feb5d"]
 
 [node name="Game" type="Control" unique_id=893702650]
@@ -12,12 +11,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_80nbo")
 
-[node name="Gameboard" parent="." unique_id=398388100 instance=ExtResource("3_feb5d")]
-layout_mode = 0
-mouse_filter = 1
-script = ExtResource("3_fc0e3")
+[node name="Gameboard" parent="." unique_id=496842010 instance=ExtResource("3_feb5d")]
+layout_mode = 1
+mouse_filter = 2
 
 [node name="Titlemenu" parent="." unique_id=931342479 instance=ExtResource("2_e2o6t")]
 layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1

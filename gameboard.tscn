@@ -2,6 +2,147 @@
 
 [ext_resource type="Texture2D" uid="uid://dd0k8wdcwxqp1" path="res://images/sun.svg" id="1_kv177"]
 
+[sub_resource type="GDScript" id="GDScript_kv177"]
+script/source = "extends Control
+const CardScene = preload(\"res://CardScene.tscn\")
+var hand_array = []
+var drawing_cards = false
+var drop_target = null
+@onready var game: Control = get_node(\"/root/Main/Game\")
+@onready var DragLayer = get_tree().root.get_node(\"Main/DragLayer\")
+
+func _ready() -> void:
+	pass
+
+func _process(_delta: float) -> void:
+	pass
+	
+func init_ui() -> void:
+	populate_hand()
+
+func populate_hand() -> void:
+	drawing_cards = true
+	for data in game.hand:
+		var card = CardScene.instantiate()
+		# initialize card (example properties — adapt to your Card.tscn API)
+		if card.has_method(\"set_card_data\"):
+			card.set_card_data(data)
+		elif card.has_node(\"Sprite\") and data.texture:
+			card.get_node(\"Sprite\").texture = load(data.texture)
+		$PlayerHand.add_child(card)
+		card.gameboard = self
+	_update_hand_layout()
+	drawing_cards = false
+		
+func _update_hand_layout():
+	var hand_array = $PlayerHand.get_children()
+	var n = hand_array.size()
+	if n == 0:
+		return
+	var span_deg = 60.0
+	var radius = 320.0
+	var center = Vector2(0, 300)   # local center of the fan; adjust as needed
+	for i in range(n):
+		var t = 0.5 if n == 1 else float(i) / float(n - 1)
+		var angle = lerp(-span_deg/2, span_deg/2, t)
+		var a = deg_to_rad(angle)
+		var offset = Vector2(sin(a), -cos(a)) * radius
+		var card = hand_array[i]
+		card.position = center + offset
+		card.rotation = a * 0.7
+
+func _update_playrow_layout():
+	var playrow_array = $TextureRect2/PlayRow.get_children()
+	var n = playrow_array.size()
+	var center = Vector2(0, 0)
+	if n == 0:
+		return
+	for i in range(n):
+		var offset = Vector2(50 * i, 0)
+		var card = playrow_array[i]
+		card.position = center + offset
+		card.rotation = 0
+		card.scale = Vector2(0.7, 0.7)
+
+func _on_player_hand_child_entered_tree(_node: Node) -> void:
+	if drawing_cards: 
+		return
+	_update_hand_layout()
+
+func _on_player_hand_child_exiting_tree(_node: Node) -> void:
+	if drawing_cards:
+		return
+	_update_hand_layout()
+	
+func drop_card(card) -> void:
+		# find drop target under mouse (example: a Control with \"PlayRow\" name)
+	var mouse_pos = get_global_mouse_position()
+	#var picked = get_viewport().gui_pick(mouse_pos)  # returns Control under point
+	var picked = get_drop_target()
+	if picked is Control:
+		DragLayer.remove_child(card)
+		picked.add_child(card)
+		if picked.has_method(\"on_card_dropped\"):
+			picked.on_card_dropped(card)
+	else:
+		# return to original parent and animate back (instant here)
+		DragLayer.remove_child(card)
+		card.position = card.original_rect_pos
+		card.original_parent.add_child(card)
+		card.original_parent.move_child(card, card.original_index)
+	pass
+
+func get_drop_target() -> Control:
+	var mouse_pos = get_global_mouse_position()
+	if $TextureRect/DiscardPile.get_rect().has_point(mouse_pos):
+		return $TextureRect/DiscardPile
+	elif $TextureRect2/PlayRow.get_rect().has_point(mouse_pos):
+		return $TextureRect2/PlayRow
+	else: 
+		return null
+
+func _on_discard_pile_mouse_entered() -> void:
+	print(\"Discard pile entered\")
+	drop_target = $TextureRect/DiscardPile
+
+func _on_discard_pile_mouse_exited() -> void:
+	drop_target = null
+
+func _on_play_row_mouse_entered() -> void:
+	print(\"Play row entered\")
+	drop_target = $TextureRect2/PlayRow
+
+func _on_play_row_mouse_exited() -> void:
+	drop_target = null
+
+
+func _on_play_row_gui_input(event: InputEvent) -> void:
+	print(event)
+
+
+func _on_play_row_child_entered_tree(node: Node) -> void:
+	_update_playrow_layout()
+"
+
+[sub_resource type="GDScript" id="GDScript_14ufp"]
+resource_name = "PlayerHand"
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _get_drag_data(at_position: Vector2) -> Variant:
+	print(at_position)
+	return at_position
+"
+
 [node name="Gameboard" type="Control" unique_id=496842010]
 layout_mode = 3
 anchors_preset = 15
@@ -10,32 +151,63 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = SubResource("GDScript_kv177")
 
 [node name="PlayerHand" type="Control" parent="." unique_id=1537333377]
 custom_minimum_size = Vector2(300, 300)
 anchors_preset = 0
 offset_left = 187.0
 offset_top = 609.0
-offset_right = 1791.0
+offset_right = 1532.0
 offset_bottom = 1078.0
 mouse_filter = 1
+script = SubResource("GDScript_14ufp")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1051538481]
-layout_mode = 0
-offset_left = 169.0
-offset_top = 41.0
-offset_right = 1713.0
-offset_bottom = 309.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82600003
+anchor_top = 0.5
+anchor_right = 0.96300006
+anchor_bottom = 0.87900007
+offset_left = -0.6828613
+offset_top = -2.0
+offset_right = -0.9127197
+offset_bottom = 2.1999512
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 texture = ExtResource("1_kv177")
-expand_mode = 3
+expand_mode = 1
 
-[node name="DiscardPile" type="HFlowContainer" parent="TextureRect" unique_id=1926242922]
+[node name="DiscardPile" type="Control" parent="TextureRect" unique_id=1694774710]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1139597463]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 82.0
+offset_right = 1742.0
+offset_bottom = 350.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("1_kv177")
+expand_mode = 3
+
+[node name="PlayRow" type="Control" parent="TextureRect2" unique_id=1620371588]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="child_entered_tree" from="PlayerHand" to="." method="_on_player_hand_child_entered_tree"]
+[connection signal="child_exiting_tree" from="PlayerHand" to="." method="_on_player_hand_child_exiting_tree"]
+[connection signal="child_entered_tree" from="TextureRect2/PlayRow" to="." method="_on_play_row_child_entered_tree"]
