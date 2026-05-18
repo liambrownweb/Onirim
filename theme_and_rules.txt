@@ -1,0 +1,16 @@
+Ghost of Egypt (rebranded Onirim, at least to start with)
+
+* Theme: Radames Al-Hamra, once a cleaner at Karnak, became a dreaded specter who haunts Thebes and slays anyone foolish enough to go outside on the night of a red moon. The player, a wab (novice priest), must banish Radames through a magic ritual of execration.
+
+* How to banish Radames: The priest must do the following:
+	* Obtain from the Pools of Purification water and clay. Once both are obtained, the priest has a figure and a pot of water for purification.
+	* Obtain a blessing of Horus and the secret name from Thoth at the Great Hypostyle Hall. Once both of these 
+	* From the library, obtain a fresh papyrus and a spell for execration.
+	* From the workshops of the Craftsmen's Quarter, obtain dye and binding, and a knife.
+
+Lose screen (reprimand + task pointer)
+"You have failed your final task, and Radames smiles upon the blood moon once more. Return to the [Pools of Purification / Great Hypostyle Hall / Grand Library / Craftsmen’s Quarter] and wait for me — we have much to discuss before you face this trial again."
+
+* Completion of the ritual: the priest speaks to his hery-hebet (lector-priest, his mentor) and they gather a retinue at the high sanctuary of the solar chapel.
+	Win screen (banishment + promotion rite)
+	"Well done. The specter is driven back and the curse is lifted. Step down from the platform; we will perform the rite of hou (the priestly investiture) and you shall be admitted as a priest of Ra and a keeper of the Bark Shrine."
