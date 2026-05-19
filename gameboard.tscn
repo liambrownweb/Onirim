@@ -10,6 +10,8 @@ var drawing_cards = false
 var drop_target = null
 @onready var game: Control = get_node(\"/root/Main/Game\")
 @onready var DragLayer = get_tree().root.get_node(\"Main/DragLayer\")
+@onready var discard = $TextureRect/DiscardPile
+@onready var playrow = $TextureRect2/PlayRow
 
 func _ready() -> void:
 	pass
@@ -74,19 +76,20 @@ func _on_player_hand_child_exiting_tree(_node: Node) -> void:
 		return
 	_update_hand_layout()
 	
-func drop_card(card) -> void:
+func drop_card(card: CardScene.CardScene) -> void:
 		# find drop target under mouse (example: a Control with \"PlayRow\" name)
 	var mouse_pos = get_global_mouse_position()
 	#var picked = get_viewport().gui_pick(mouse_pos)  # returns Control under point
 	var picked = get_drop_target()
-	if picked is Control:
-		DragLayer.remove_child(card)
+	DragLayer.remove_child(card)
+	if picked == discard and game.can_discard(card):
 		picked.add_child(card)
-		if picked.has_method(\"on_card_dropped\"):
-			picked.on_card_dropped(card)
+		game.discard(card)
+	elif picked == playrow and game.can_play(card):
+		picked.add_child(card)
+		game.play(card)
 	else:
 		# return to original parent and animate back (instant here)
-		DragLayer.remove_child(card)
 		card.position = card.original_rect_pos
 		card.original_parent.add_child(card)
 		card.original_parent.move_child(card, card.original_index)
@@ -94,10 +97,10 @@ func drop_card(card) -> void:
 
 func get_drop_target() -> Control:
 	var mouse_pos = get_global_mouse_position()
-	if $TextureRect/DiscardPile.get_rect().has_point(mouse_pos):
-		return $TextureRect/DiscardPile
-	elif $TextureRect2/PlayRow.get_rect().has_point(mouse_pos):
-		return $TextureRect2/PlayRow
+	if discard.get_rect().has_point(mouse_pos):
+		return discard
+	elif playrow.get_rect().has_point(mouse_pos):
+		return playrow
 	else: 
 		return null
 
