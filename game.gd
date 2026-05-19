@@ -34,3 +34,7 @@ func start_new_game() -> void:
 	
 func end_game() -> void:
 	game_in_progress = false
+
+func play(card: Card) -> bool:
+	played.append(card)
+	return true

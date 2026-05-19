@@ -1,72 +1,8 @@
 [gd_scene format=3 uid="uid://dyk2fh3hd2l84"]
 
+[ext_resource type="Script" uid="uid://vrq7ow5mdt38" path="res://CardScene.gd" id="1_8epmk"]
 [ext_resource type="Texture2D" uid="uid://b2v7s7umeu6rg" path="res://images/karnak_pillars_night.png" id="1_hael8"]
 [ext_resource type="Texture2D" uid="uid://bop825bip6nss" path="res://images/moon.svg" id="2_21rx5"]
-
-[sub_resource type="GDScript" id="GDScript_8ked3"]
-resource_name = "CardScene"
-script/source = "extends Control
-class_name CardScene
-var dragging = false
-var drag_offset = Vector2.ZERO
-var original_parent = null
-var original_index = -1
-var original_rect_pos = Vector2.ZERO
-var gameboard = null
-
-@onready var DragLayer = get_tree().root.get_node(\"Main/DragLayer\")
-
-func _ready() -> void:
-	pass
-
-func _process(_delta: float) -> void:
-	pass
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton \\
-		and event.button_index == MOUSE_BUTTON_LEFT \\
-		and dragging \\
-		and not event.pressed:
-			_end_drag()
-
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		print(event)
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			print(\"Starting drag\")
-			_start_drag(event.position)
-		else:
-			print(\"Not starting drag\")
-		#else:
-			#_end_drag()
-	elif event is InputEventMouseMotion and dragging:
-		global_position = get_global_mouse_position() - drag_offset	
-
-func _start_drag(local_click_pos):
-	dragging = true
-	original_parent = get_parent()
-	original_index = self.get_index()
-	original_rect_pos = position
-	drag_offset = local_click_pos
-	# reparent to DragLayer while preserving global position
-	var gpos = global_position
-	original_parent.remove_child(self)
-	DragLayer.add_child(self)
-	global_position = gpos
-	move_to_front()
-
-func _end_drag():
-	dragging = false
-	gameboard.drop_card(self)
-
-func _get_drag_data(at_position: Vector2) -> Variant:
-	print(at_position)
-	return at_position
-
-func _on_mouse_entered() -> void:
-	pass
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ked3"]
 content_margin_left = 4.0
@@ -101,7 +37,7 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 mouse_filter = 1
-script = SubResource("GDScript_8ked3")
+script = ExtResource("1_8epmk")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=38472730]
 layout_mode = 1

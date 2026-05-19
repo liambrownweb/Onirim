@@ -22,17 +22,20 @@ func _process(_delta: float) -> void:
 func init_ui() -> void:
 	populate_hand()
 
+func make_card(card_data: Card) -> CardScene:
+	var card = CardScene.instantiate()
+	if card.has_method(\"set_card_data\"):
+		card.set_card_data(card_data)
+	elif card.has_node(\"Sprite\") and card_data.texture:
+		card.get_node(\"Sprite\").texture = load(card_data.texture)
+	return card
+
 func populate_hand() -> void:
 	drawing_cards = true
 	for data in game.hand:
-		var card = CardScene.instantiate()
-		# initialize card (example properties — adapt to your Card.tscn API)
-		if card.has_method(\"set_card_data\"):
-			card.set_card_data(data)
-		elif card.has_node(\"Sprite\") and data.texture:
-			card.get_node(\"Sprite\").texture = load(data.texture)
-		$PlayerHand.add_child(card)
+		var card = make_card(data)
 		card.gameboard = self
+		$PlayerHand.add_child(card)
 	_update_hand_layout()
 	drawing_cards = false
 		
@@ -76,18 +79,18 @@ func _on_player_hand_child_exiting_tree(_node: Node) -> void:
 		return
 	_update_hand_layout()
 	
-func drop_card(card: CardScene.CardScene) -> void:
+func drop_card(card: CardScene) -> void:
 		# find drop target under mouse (example: a Control with \"PlayRow\" name)
 	var mouse_pos = get_global_mouse_position()
 	#var picked = get_viewport().gui_pick(mouse_pos)  # returns Control under point
 	var picked = get_drop_target()
 	DragLayer.remove_child(card)
-	if picked == discard and game.can_discard(card):
+	if picked == discard and game.can_discard(card.card_data):
 		picked.add_child(card)
 		game.discard(card)
-	elif picked == playrow and game.can_play(card):
+	elif picked == playrow and game.can_play(card.card_data):
 		picked.add_child(card)
-		game.play(card)
+		game.play(card.card_data)
 	else:
 		# return to original parent and animate back (instant here)
 		card.position = card.original_rect_pos
