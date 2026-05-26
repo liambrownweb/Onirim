@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Onirim"
+config/name="Ghosts of Egypt"
 run/main_scene="uid://bh6ao1rsyyl1n"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
@@ -23,7 +23,7 @@ window/stretch/mode="viewport"
 
 [dotnet]
 
-project/assembly_name="Onirim"
+project/assembly_name="GhostsOfEgypt"
 
 [input]
 

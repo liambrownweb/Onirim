@@ -1,4 +1,4 @@
-Ghost of Egypt (rebranded Onirim, at least to start with)
+Ghost of Egypt (based on popular labyrinth games, at least to start with)
 
 * Theme: Radames Al-Hamra, once a cleaner at Karnak, became a dreaded specter who haunts Thebes and slays anyone foolish enough to go outside on the night of a red moon. The player, a wab (novice priest), must banish Radames through a magic ritual of execration.
 

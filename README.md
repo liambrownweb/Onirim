@@ -1,4 +1,4 @@
-# Onirim - Git Workflow Notes
+# Ghosts of Egypt - Git Workflow Notes
 
 This file is a practical guide for keeping this Godot repository clean and easy to collaborate on.
 
