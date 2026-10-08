@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bryvfv4p7oogf"
-path="res://.godot/imported/library2.png-1ebf885ba3fa036bbcb6c20232ff2a85.ctex"
+path="res://.godot/imported/library_night.png-61a17d5b8359ad38852064864c266e9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/card_backdrops/library2.png"
-dest_files=["res://.godot/imported/library2.png-1ebf885ba3fa036bbcb6c20232ff2a85.ctex"]
+source_file="res://images/card_backdrops/library_night.png"
+dest_files=["res://.godot/imported/library_night.png-61a17d5b8359ad38852064864c266e9e.ctex"]
 
 [params]
 

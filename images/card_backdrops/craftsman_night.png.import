@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7n4ckuqbyiyi"
-path="res://.godot/imported/craftsman.png-43a747008157addf1dfb0916dc981e3e.ctex"
+uid="uid://cxfln6a0y208"
+path="res://.godot/imported/craftsman_night.png-3037300b3db2424811dd54af09d05727.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/card_backdrops/craftsman.png"
-dest_files=["res://.godot/imported/craftsman.png-43a747008157addf1dfb0916dc981e3e.ctex"]
+source_file="res://images/card_backdrops/craftsman_night.png"
+dest_files=["res://.godot/imported/craftsman_night.png-3037300b3db2424811dd54af09d05727.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxfln6a0y208"
-path="res://.godot/imported/craftsman2.png-110bde6006c34b2f3e42db6b01b5b883.ctex"
+uid="uid://0xubp64mfs2a"
+path="res://.godot/imported/hypostyle_day.png-672baecf9d7419b67765614103a0cea8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/card_backdrops/craftsman2.png"
-dest_files=["res://.godot/imported/craftsman2.png-110bde6006c34b2f3e42db6b01b5b883.ctex"]
+source_file="res://images/card_backdrops/hypostyle_day.png"
+dest_files=["res://.godot/imported/hypostyle_day.png-672baecf9d7419b67765614103a0cea8.ctex"]
 
 [params]
 

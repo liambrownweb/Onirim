@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5o12eu4lohkc"
-path="res://.godot/imported/purification2.png-8b49bf01624841559737d942b43bcfc7.ctex"
+uid="uid://bj6u61k3hgpp1"
+path="res://.godot/imported/hypostyle_night.png-f04309d1812cfa882c7e0a8c98fab3f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/card_backdrops/purification2.png"
-dest_files=["res://.godot/imported/purification2.png-8b49bf01624841559737d942b43bcfc7.ctex"]
+source_file="res://images/card_backdrops/hypostyle_night.png"
+dest_files=["res://.godot/imported/hypostyle_night.png-f04309d1812cfa882c7e0a8c98fab3f2.ctex"]
 
 [params]
 
