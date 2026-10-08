@@ -1,8 +1,9 @@
 extends RefCounted
 class_name CardAttribs
 
-enum types { LOCATION, DOOR, DREAM, MIRROR }
-enum locations { AQUARIUM, GARDEN, LIBRARY, OBSERVATORY }
-enum dreams { NIGHTMARE, SPHINX, DIVER, CONFUSION }
+enum types { LOCATION, TOOL, ENCOUNTER, MIRROR }
+enum locations { POOLS_OF_PURIFICATION, HYPOSTYLE_HALL, LIBRARY, CRAFTSMANS_QUARTER }
+enum tools { WATER, CLAY, BLESSING_OF_HORUS, SECRET_NAME, PAPYRUS, SPELL, DYE_BINDING, KNIFE }
+enum dreams { APOPHIS, SPHINX, DIVER, CONFUSION }
 enum mirrors {}
-enum symbols { SUN, MOON, KEY }
+enum symbols { EYE_OF_RA, LAMP_OF_OSIRIS, ANKH }

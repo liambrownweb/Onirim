@@ -9,6 +9,7 @@ var original_rect_pos = Vector2.ZERO
 var gameboard = null
 
 @onready var DragLayer = get_tree().root.get_node("Main/DragLayer")
+@onready var panel = $PanelContainer
 
 func _ready() -> void:
 	pass
@@ -35,6 +36,7 @@ func _gui_input(event: InputEvent) -> void:
 		#else:
 			#_end_drag()
 	elif event is InputEventMouseMotion and dragging:
+		print (drag_offset)
 		global_position = get_global_mouse_position() - drag_offset	
 
 func _start_drag(local_click_pos):
@@ -59,7 +61,15 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	return at_position
 
 func _on_mouse_entered() -> void:
-	pass
+	var style = panel.get_theme_stylebox("panel").duplicate()
+	style.bg_color = Color(0.1, 0.1, 0.1, 1)
+	panel.add_theme_stylebox_override("panel", style)
+	print("Overriding style")
+
+func _on_mouse_exited() -> void:
+	var style = panel.get_theme_stylebox("panel").duplicate()
+	style.bg_color = Color(1, 1, 1, 1)
+	panel.add_theme_stylebox_override("panel", style)
 	
 func set_card_data(card_data_in: Card) -> void:
 	card_data = card_data_in

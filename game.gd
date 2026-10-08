@@ -3,7 +3,7 @@ var game_deck: Deck
 var hand = []
 var limbo = []
 var played = []
-var discard = []
+var discarded = []
 const Decks = preload("res://components/decks.gd")
 
 @onready var game_in_progress = false
@@ -28,7 +28,7 @@ func start_new_game() -> void:
 	game_deck = Deck.new()
 	game_deck.build_from(Decks.STANDARD)
 	game_deck.shuffle()
-	hand.append_array(game_deck.draw_top(5))
+	fill_hand()
 	$Gameboard.init_ui()
 	game_in_progress = true
 	
@@ -36,5 +36,18 @@ func end_game() -> void:
 	game_in_progress = false
 
 func play(card: Card) -> bool:
-	played.append(card)
-	return true
+	if can_play(card):
+		played.append(card)
+		fill_hand()
+		return true
+	return false
+
+func discard(card: Card) -> bool:
+	if can_discard(card):
+		discarded.append(card)
+		fill_hand()
+		return true
+	return false
+
+func fill_hand() -> void:
+	hand.append_array(game_deck.draw_top(5 - hand.size()))
