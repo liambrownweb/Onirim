@@ -97,7 +97,7 @@ func drop_card(card: CardScene) -> void:
 	DragLayer.remove_child(card)
 	if picked == discard_pile and game.can_discard(card.card_data):
 		picked.add_child(card)
-		if game.discard(card): populate_hand()
+		if game.discard(card.card_data): populate_hand()
 	elif picked == playrow and game.can_play(card.card_data):
 		picked.add_child(card)
 		if game.play(card.card_data): populate_hand()

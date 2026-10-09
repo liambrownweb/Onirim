@@ -75,5 +75,4 @@ offset_bottom = 113.0
 texture = ExtResource("2_21rx5")
 expand_mode = 3
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer" to="." method="_on_mouse_exited"]

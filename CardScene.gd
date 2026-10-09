@@ -10,9 +10,16 @@ var gameboard = null
 
 @onready var DragLayer = get_tree().root.get_node("Main/DragLayer")
 @onready var panel = $PanelContainer
+@onready var background = $PanelContainer/Panel/BackgroundArt
+@onready var glyph = $PanelContainer/Panel/Glyph
 
 func _ready() -> void:
-	pass
+	if (card_data.background != null):
+		background.texture = card_data.background
+	if (card_data.symbol != null):
+		glyph.texture = card_data.glyph
+	else:
+		glyph.texture = null
 
 func _process(_delta: float) -> void:
 	pass

@@ -17,12 +17,12 @@ func _process(_delta: float) -> void:
 	pass
 	
 func can_play(card: Card) -> bool:
-	return played.front().subtype != card.subtype \
-	&& card.type != Decks.C.types.ENCOUNTER
+	return played.size() == 0 \
+	|| ( played.front().subtype != card.subtype \
+	&& card.type != Decks.C.types.ENCOUNTER )
 	
 func can_discard(card: Card) -> bool:
-	return card.type != Decks.C.types.ENCOUNTER\
-	&& card.type != Decks.C.types.TOOL
+	return card.type == Decks.C.types.LOCATION
 	
 func start_new_game() -> void:
 	game_deck = Deck.new()
