@@ -9,11 +9,11 @@ content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+corner_radius_top_left = 19
+corner_radius_top_right = 19
+corner_radius_bottom_right = 19
+corner_radius_bottom_left = 19
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ujke"]
 corner_radius_top_left = 15
@@ -69,10 +69,14 @@ texture = ExtResource("1_hael8")
 expand_mode = 3
 
 [node name="Glyph" type="TextureRect" parent="PanelContainer/Panel" unique_id=978775835]
+clip_contents = true
 layout_mode = 0
-offset_right = 113.0
-offset_bottom = 113.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 89.0
+offset_bottom = 87.0
 texture = ExtResource("2_21rx5")
 expand_mode = 3
 
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer" to="." method="_on_mouse_exited"]

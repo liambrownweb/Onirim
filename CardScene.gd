@@ -69,13 +69,13 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 func _on_mouse_entered() -> void:
 	var style = panel.get_theme_stylebox("panel").duplicate()
-	style.bg_color = Color(0.1, 0.1, 0.1, 1)
+	style.bg_color = Color(1, 1, 1, 1)
 	panel.add_theme_stylebox_override("panel", style)
 	print("Overriding style")
 
 func _on_mouse_exited() -> void:
 	var style = panel.get_theme_stylebox("panel").duplicate()
-	style.bg_color = Color(1, 1, 1, 1)
+	style.bg_color = Color(0.1, 0.1, 0.1, 1)
 	panel.add_theme_stylebox_override("panel", style)
 	
 func set_card_data(card_data_in: Card) -> void:
